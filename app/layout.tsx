@@ -1,6 +1,17 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+// import Navbar from "@/components/main/navbar";
+import { ThemeProvider } from "@/components/theme-provider";
+// import Footer from "@/components/main/footer";
+import { UserProvider } from "@/components/context/UserContext";
+import { Toaster } from "@/components/ui/sonner";
+import { LoadingProvider } from "@/components/context/LoadingContext";
+import LoadingOverlay from "@/components/main/LoadingOverlay";
+import { ProjectsProvider } from "@/components/context/ProjectContext";
+import { DocumentationProvider } from "@/components/context/DocumentationContext";
+import { FlowProvider } from "@/components/context/FlowContext";
+import Anounce from "@/components/Anounce";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -25,11 +36,42 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-      </body>
+      <UserProvider>
+        <ProjectsProvider>
+          <DocumentationProvider>
+            <FlowProvider>
+              <LoadingProvider>
+                <body
+                  className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+                >
+                  <Anounce />
+                  {/* <div
+          id="home"
+          className="absolute inset-0 bg-[linear-gradient(to_right,rgba(23,23,23,0.4)_1px,transparent_1px),linear-gradient(to_bottom,rgba(23,23,23,0.4)_1px,transparent_1px)] bg-[size:3rem_3rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_110%)] h-full mt-[63px"
+        /> */}
+
+                  {/* here */}
+                  {/* <Navbar />
+          <main className="mx-auto w-full z-40 relative bg-[#09090B]">
+            {" "} */}
+                  <ThemeProvider
+                    attribute="class"
+                    defaultTheme="dark"
+                    enableSystem
+                    disableTransitionOnChange
+                  >
+                    <LoadingOverlay />
+                    <div className=" bg-[#09090B]">{children}</div>
+                  </ThemeProvider>
+                  {/* <Footer />
+          </main> */}
+                  <Toaster />
+                </body>
+              </LoadingProvider>
+            </FlowProvider>
+          </DocumentationProvider>
+        </ProjectsProvider>
+      </UserProvider>
     </html>
   );
 }
