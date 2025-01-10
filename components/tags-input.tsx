@@ -167,9 +167,8 @@ export default function TagsInput({
     { id: "rocksdb", label: "RocksDB" },
     { id: "etcddb", label: "EtcdDB" },
   ],
-
   maxTags = 10,
-  label = "Stack",
+  label,
   placeholder = "Add stack...",
   error,
 }: TagInputProps) {
@@ -229,12 +228,19 @@ export default function TagsInput({
 
   return (
     <div className="w-full space-y-2" ref={containerRef}>
+      {label && (
+        <label
+          htmlFor="tags-input"
+          className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1"
+        >
+          {label}
+        </label>
+      )}
       <div
         className={cn(
           "min-h-[3rem] sm:min-h-[2.5rem] p-2 sm:p-1.5",
           "rounded-lg border",
           "border-input",
-          // "bg-background",
           "focus-within:ring-2 focus-within:ring-ring",
           "flex items-center flex-wrap gap-2 sm:gap-1.5 relative"
         )}
@@ -263,6 +269,7 @@ export default function TagsInput({
         ))}
 
         <input
+          id="tags-input"
           ref={inputRef}
           type="text"
           value={input}
@@ -343,7 +350,7 @@ export default function TagsInput({
                   )}
                 >
                   <Plus className="w-3.5 h-3.5" />
-                  Create "{input}"
+                  Create &ldquo;{input}&rdquo;
                 </button>
               )}
             </div>

@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { simplifyData } from "@/lib/functions/utils";
 import DashLoad from "@/components/dashboard/dash-load";
-import { useUser } from "@/components/context/UserContext";
 import { useDocumentation } from "@/components/context/DocumentationContext";
 import { useProjects } from "@/components/context/ProjectContext";
 import { toast } from "sonner";
@@ -34,7 +33,6 @@ import { Label } from "@/components/ui/label";
 import { MDXComponent } from "@/components/dashboard/mdx-components";
 
 export default function DocsPage() {
-  const { user } = useUser();
   const { currentProject } = useProjects();
   const { allDocumentation, saveDocumentation } = useDocumentation();
   const [loading, setLoading] = useState(false);

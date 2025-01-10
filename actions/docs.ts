@@ -4,13 +4,70 @@ import { ID } from "node-appwrite";
 export interface Documentation {
   $id: string;
   projectId: string;
-  data: any;
+  data: {
+    Title: {
+      ProjectName: string;
+      Version: string;
+      Tagline?: string;
+    };
+    Introduction: {
+      Overview: string;
+      Purpose: string;
+      Goals: string;
+      TargetAudience: string;
+      TechStack: string;
+    };
+    Features: string[];
+    InstallationandSetup: {
+      Prerequisites: string;
+      CloneRepository: string;
+      InstallDependencies: string;
+      EnvironmentSetup: string;
+      RuntheApplication: string;
+    };
+    Usage: {
+      HowtoUse: string;
+      Examples?: string;
+    };
+    Architecture: {
+      SystemOverview: string;
+      Modules: string;
+    };
+    APIReference: {
+      EndpointOverview: string[];
+      RequestandResponse?: string;
+      ErrorCodes?: string[];
+    };
+    Contributing: {
+      Guidelines: string;
+      CodeofConduct?: string;
+      ReportingIssues?: string;
+    };
+    FAQ: Array<{
+      Problem: string;
+      Solution: string;
+    }>;
+    Testing: {
+      Instructions: string;
+      Details?: string;
+    };
+    License: {
+      License: string;
+    };
+    Acknowledgments: string[];
+    Appendices?: string[];
+    ContactInformation: {
+      Email: string;
+      GitHub?: string;
+      Links?: string[];
+    };
+  };
   markdown: string;
 }
 
 export async function createDocumentation(
   projectId: string,
-  data: any,
+  data: Documentation["data"],
   markdown: string
 ): Promise<Documentation> {
   const { database } = await createAdminClient();
@@ -30,7 +87,7 @@ export async function createDocumentation(
 
 export async function updateDocumentation(
   docId: string,
-  data: any,
+  data: Documentation["data"],
   markdown: string
 ): Promise<Documentation> {
   const { database } = await createAdminClient();

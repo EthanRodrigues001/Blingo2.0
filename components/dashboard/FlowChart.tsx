@@ -1,16 +1,14 @@
 import React, { useState, useCallback, useEffect } from "react";
 import ReactFlow, {
-  Node,
-  Edge,
   Controls,
   Background,
   useNodesState,
   useEdgesState,
   addEdge,
   Connection,
-  Panel,
   getRectOfNodes,
   getTransformForBounds,
+  ReactFlowInstance,
 } from "reactflow";
 import "reactflow/dist/style.css";
 
@@ -48,7 +46,9 @@ export default function FlowChart() {
   const [includeChanges, setIncludeChanges] = useState(false);
   const [isGenerating, setIsGenerating] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
-  const [flowInstance, setFlowInstance] = useState<any>(null);
+  const [flowInstance, setFlowInstance] = useState<ReactFlowInstance | null>(
+    null
+  );
 
   const onConnect = useCallback(
     (params: Connection) => setEdges((eds) => addEdge(params, eds)),
@@ -64,7 +64,7 @@ export default function FlowChart() {
       setNodes([]);
       setEdges([]);
     }
-  }, [currentProject, projectFlows]);
+  }, [currentProject, projectFlows, setNodes, setEdges]);
 
   const handleSave = useCallback(async () => {
     if (!currentProject) return;
@@ -81,15 +81,12 @@ export default function FlowChart() {
     if (!flowElement) return;
 
     try {
-      // Get the bounds of all nodes
       const nodesBounds = getRectOfNodes(nodes);
       const padding = 50;
 
-      // Calculate dimensions that encompass all nodes plus padding
       const width = nodesBounds.width + padding * 2;
       const height = nodesBounds.height + padding * 2;
 
-      // Calculate the transform to center the content
       const transform = getTransformForBounds(
         nodesBounds,
         width,
@@ -98,31 +95,26 @@ export default function FlowChart() {
         2
       );
 
-      // Create a temporary container to render the flow
       const tempContainer = document.createElement("div");
       tempContainer.style.width = `${width}px`;
       tempContainer.style.height = `${height}px`;
       tempContainer.style.overflow = "visible";
       document.body.appendChild(tempContainer);
 
-      // Clone the flow element and adjust its style
       const clonedFlow = flowElement.cloneNode(true) as HTMLElement;
       clonedFlow.style.width = "100%";
       clonedFlow.style.height = "100%";
       clonedFlow.style.transform = `translate(${transform[0]}px, ${transform[1]}px) scale(${transform[2]})`;
       tempContainer.appendChild(clonedFlow);
 
-      // Generate the image
       const dataUrl = await toPng(tempContainer, {
         backgroundColor: "#ffffff",
         width: width,
         height: height,
       });
 
-      // Remove the temporary container
       document.body.removeChild(tempContainer);
 
-      // Download the image
       const link = document.createElement("a");
       link.href = dataUrl;
       link.download = `${currentProject?.name || "flow"}-diagram.png`;
@@ -202,7 +194,7 @@ export default function FlowChart() {
         setIncludeChanges(false);
       }
     },
-    [currentProject, saveFlow]
+    [currentProject, saveFlow, setNodes, setEdges, isGenerating]
   );
 
   if (!currentProject) return <div>No project selected</div>;
@@ -231,7 +223,7 @@ export default function FlowChart() {
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
-        onInit={setFlowInstance}
+        onInit={(instance: ReactFlowInstance) => setFlowInstance(instance)}
         fitView
       >
         <Background />
@@ -299,7 +291,7 @@ export default function FlowChart() {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
-              <DropdownMenuItem onClick={downloadImage} disabled>
+              <DropdownMenuItem onClick={downloadImage}>
                 Download as Image
               </DropdownMenuItem>
               <DropdownMenuItem onClick={downloadJson}>

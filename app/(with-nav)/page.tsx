@@ -1,4 +1,3 @@
-// import { GlobeDemo } from "@/components/home/demo";
 import Section1 from "@/components/home/section1";
 import Section3 from "@/components/home/section3";
 import Section4 from "@/components/home/section4";
@@ -15,7 +14,6 @@ export default function Home() {
       <Section3 />
       <Section4 />
       <Section5 />
-      {/* <GlobeDemo /> */}
     </>
   );
 }

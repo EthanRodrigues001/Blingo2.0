@@ -23,8 +23,7 @@ const Footer = () => {
           <div className="space-y-4">
             <h3 className="text-lg font-semibold">About Us</h3>
             <p className="text-sm text-muted-foreground">
-              We're a team of passionate developers creating innovative
-              solutions.
+              Create the perfect project for your team solutions.
             </p>
             <HoverCard>
               <HoverCardTrigger asChild>

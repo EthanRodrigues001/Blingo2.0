@@ -1,6 +1,12 @@
 "use client";
 
-import React, { createContext, useState, useContext, useEffect } from "react";
+import React, {
+  createContext,
+  useState,
+  useContext,
+  useEffect,
+  useCallback,
+} from "react";
 import { getLoggedInUser } from "@/actions/auth";
 
 type UserType = {
@@ -29,6 +35,19 @@ type UserContextType = {
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
+const setUserNull = (
+  setUser: React.Dispatch<React.SetStateAction<UserType | null>>,
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>
+) => {
+  try {
+    setLoading(true);
+    setUser(null);
+    setLoading(false);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
@@ -37,7 +56,21 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
   const [error, setError] = useState<string | null>(null);
   const [photo, setPhoto] = useState<string | null>(null);
 
-  const fetchUser = async () => {
+  const fetchPhoto = useCallback(async (user: UserType) => {
+    if (!user.photo) return;
+
+    try {
+      const response = await fetch(
+        `/api/v1/get-user-image?fileId=${user.photo}`
+      );
+      setPhoto(URL.createObjectURL(await response.blob()));
+    } catch (error) {
+      console.error("Failed to fetch photo:", error);
+      setPhoto(null);
+    }
+  }, []);
+
+  const fetchUser = useCallback(async () => {
     try {
       setLoading(true);
       const userData = await getLoggedInUser();
@@ -55,39 +88,19 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
     } finally {
       setLoading(false);
     }
-  };
+  }, [fetchPhoto]);
 
   useEffect(() => {
     fetchUser();
+  }, [fetchUser]);
+
+  const refetchUser = useCallback(() => {
+    fetchUser();
+  }, [fetchUser]);
+
+  const contextSetUserNull = useCallback(() => {
+    setUserNull(setUser, setLoading);
   }, []);
-
-  const refetchUser = async () => {
-    await fetchUser();
-  };
-
-  const fetchPhoto = async (user: UserType) => {
-    if (!user.photo) return;
-
-    try {
-      const response = await fetch(
-        `/api/v1/get-user-image?fileId=${user.photo}`
-      );
-      setPhoto(URL.createObjectURL(await response.blob()));
-    } catch (error) {
-      console.error("Failed to fetch photo:", error);
-      setPhoto(null);
-    }
-  };
-
-  const setUserNull = () => {
-    try {
-      setLoading(true);
-      setUser(null);
-      setLoading(false);
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   return (
     <UserContext.Provider
@@ -97,7 +110,7 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
         loading,
         error,
         refetchUser,
-        setUserNull,
+        setUserNull: contextSetUserNull,
       }}
     >
       {children}

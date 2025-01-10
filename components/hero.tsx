@@ -2,8 +2,7 @@ import { ArrowRightIcon } from "lucide-react";
 import Link from "next/link";
 import { BlurText } from "@/components/ui/blur-text";
 import { Button } from "@/components/ui/button";
-import { motion } from "framer-motion";
-import Image from "next/image";
+
 import Container from "@/components/container";
 import ProjectIdeaGenerator from "./project-idea-generator";
 

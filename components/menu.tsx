@@ -2,22 +2,13 @@
 
 import {
   NavigationMenu,
-  NavigationMenuContent,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
-  NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
-import {
-  CalendarRangeIcon,
-  CircleHelp,
-  HashIcon,
-  Newspaper,
-  UsersIcon,
-} from "lucide-react";
+
 import Link from "next/link";
 import React from "react";
-import Icons from "@/components/icons";
 
 interface Props {
   title: string;

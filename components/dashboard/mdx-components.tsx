@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import { MDXComponents } from "mdx/types";
 import { cn } from "@/lib/utils";
 
@@ -67,7 +68,11 @@ export const MDXComponent: MDXComponents = {
     />
   ),
   img: ({ className, alt, ...props }) => (
-    <img className={cn("rounded-md border", className)} alt={alt} {...props} />
+    <Image
+      className={cn("rounded-md border", className)}
+      alt={alt}
+      {...props}
+    />
   ),
   hr: ({ ...props }) => (
     <hr className="my-4 border-slate-200 md:my-8" {...props} />

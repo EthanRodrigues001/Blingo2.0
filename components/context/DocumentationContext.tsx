@@ -8,13 +8,14 @@ import React, {
   useEffect,
 } from "react";
 import { Documentation } from "@/actions/docs";
-import { useProjects } from "./ProjectContext";
+
+import { Documentation } from "@/actions/docs";
 
 interface DocumentationContextType {
   allDocumentation: Record<string, Documentation>;
   saveDocumentation: (
     projectId: string,
-    data: any,
+    data: Documentation["data"],
     markdown: string
   ) => Promise<void>;
 }
@@ -29,7 +30,6 @@ export const DocumentationProvider: React.FC<{ children: ReactNode }> = ({
   const [allDocumentation, setAllDocumentation] = useState<
     Record<string, Documentation>
   >({});
-  const { projects } = useProjects();
 
   useEffect(() => {
     const fetchDocs = async () => {
@@ -52,7 +52,7 @@ export const DocumentationProvider: React.FC<{ children: ReactNode }> = ({
 
   const saveDocumentation = async (
     projectId: string,
-    data: any,
+    data: Documentation["data"],
     markdown: string
   ) => {
     try {

@@ -1,6 +1,5 @@
 "use client";
 
-import { useUser } from "@/components/context/UserContext";
 // import { useUser } from "@/components/context/UserContext";
 import { AppSidebar } from "@/components/main/app-sidebar";
 import { UserProfileDrawer } from "@/components/main/sidebar/UserProfileDrawer";

@@ -1,27 +1,8 @@
 "use client";
 
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
-import {
-  Box,
-  CalendarClock,
-  Captions,
-  CircleHelp,
-  CopyCheck,
-  FileText,
-  Gem,
-  Layers3,
-  LineChart,
-  Newspaper,
-  UserCog,
-  Waypoints,
-} from "lucide-react";
+import { Gem, UserCog, Waypoints } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 
@@ -31,8 +12,6 @@ interface Props {
 }
 
 const MobileMenu = ({ isOpen, setIsOpen }: Props) => {
-
-
   const variants = {
     open: { opacity: 1, y: 20 },
     closed: { opacity: 0, y: 0 },
@@ -61,19 +40,19 @@ const MobileMenu = ({ isOpen, setIsOpen }: Props) => {
             onClick={() => setIsOpen(false)}
             className="w-full px-4 py-2 text-lg hover:text-muted-foreground font-normal transition transform rounded-md cursor-pointer text-foreground text-start active:scale-95 hover:bg-muted/20 active:opacity-80"
           >
-            <Link
-              href="#works"
-              className="flex items-center w-full text-start"
-            >
+            <Link href="#works" className="flex items-center w-full text-start">
               <UserCog className="w-4 h-4 mr-2" />
               How it works
             </Link>
           </li>
-                    <li
+          <li
             onClick={() => setIsOpen(false)}
             className="w-full px-4 py-2 text-lg hover:text-muted-foreground font-normal transition transform rounded-md cursor-pointer text-foreground text-start active:scale-95 hover:bg-muted/20 active:opacity-80"
           >
-            <Link href="#features" className="flex items-center w-full text-start">
+            <Link
+              href="#features"
+              className="flex items-center w-full text-start"
+            >
               <Waypoints className="w-4 h-4 mr-2" />
               Features
             </Link>
@@ -83,12 +62,14 @@ const MobileMenu = ({ isOpen, setIsOpen }: Props) => {
             onClick={() => setIsOpen(false)}
             className="w-full px-4 py-2 text-lg hover:text-muted-foreground font-normal transition transform rounded-md cursor-pointer text-foreground text-start active:scale-95 hover:bg-muted/20 active:opacity-80"
           >
-            <Link href="/pricing" className="flex items-center w-full text-start">
+            <Link
+              href="/pricing"
+              className="flex items-center w-full text-start"
+            >
               <Gem className="w-4 h-4 mr-2" />
               Pricing
             </Link>
           </li>
-
         </ul>
       </motion.div>
     </div>
