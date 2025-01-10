@@ -21,7 +21,7 @@ interface FeedbackData {
 
 export default function Section5() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const [rating, setRating] = useState("5");
+  const [rating, setRating] = useState<number>(5);
   const [feedback, setFeedback] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -41,14 +41,14 @@ export default function Section5() {
       if (response.ok) {
         toast("Feedback submitted successfully");
         setIsDialogOpen(false);
-        setRating("5");
+        setRating(5);
         setFeedback("");
       } else {
         throw new Error("Failed to send feedback");
       }
     } catch (error) {
       console.error("Error sending feedback:", error);
-      toast.error("Error sending feedback:", { description: error });
+      toast.error("Error sending feedback: " + error.message);
     }
   };
 
@@ -89,7 +89,7 @@ export default function Section5() {
               </label>
               <RadioGroup
                 value={rating}
-                onValueChange={setRating}
+                onValueChange={(value) => setRating(Number(value))}
                 className="flex gap-0 -space-x-px rounded-lg shadow-sm shadow-black/5"
               >
                 {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((number) => (

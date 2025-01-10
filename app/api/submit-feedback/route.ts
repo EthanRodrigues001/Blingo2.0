@@ -1,5 +1,10 @@
 import { NextResponse } from 'next/server';
 
+interface FeedbackData {
+  rating: number;
+  feedback: string;
+}
+
 export async function POST(request: Request) {
   const webhookUrl = process.env.DISCORD_WEBHOOK_URL;
 
@@ -8,7 +13,7 @@ export async function POST(request: Request) {
   }
 
   try {
-    const body = await request.json();
+    const body: FeedbackData = await request.json();
     const { rating, feedback } = body;
 
     const response = await fetch(webhookUrl, {
