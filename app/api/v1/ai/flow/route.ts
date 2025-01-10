@@ -132,9 +132,11 @@ export async function POST(request: NextRequest) {
     const parsedFlow = JSON.parse(generatedFlow);
 
     // Save or update the flow in the database
-    const flow;
 
-    flow = await createOrUpdateFlow(projectId, JSON.stringify(parsedFlow));
+    const flow = await createOrUpdateFlow(
+      projectId,
+      JSON.stringify(parsedFlow)
+    );
 
     return NextResponse.json(flow);
   } catch (error) {
