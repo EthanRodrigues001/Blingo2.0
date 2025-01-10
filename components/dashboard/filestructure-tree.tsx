@@ -6,7 +6,7 @@ import { useProjects } from "../context/ProjectContext";
 
 export function FileStructure() {
   const { currentProject } = useProjects();
-  const [treeData, settreeData] = useState(
+  const [treeData, settreeData] = useState<FileStructureItem[]>(
     currentProject?.file_structure
       ? JSON.parse(currentProject.file_structure)
       : []
@@ -19,11 +19,18 @@ export function FileStructure() {
     );
   }, [currentProject?.file_structure]);
 
+  interface FileStructureItem {
+    id: string;
+    isSelectable: boolean;
+    name: string;
+    children?: FileStructureItem[];
+  }
+
   // const treeData = JSON.parse(
   //   '[{"children":[{"id":"2","isSelectable":true,"name":"frontend"},{"id":"8","isSelectable":true,"name":"backend"}],"id":"1","isSelectable":true,"name":"src"},{"children":[{"id":"3","isSelectable":true,"name":"App.tsx"},{"id":"4","isSelectable":true,"name":"DashboardPage.jsx"},{"id":"5","isSelectable":true,"name":"components"},{"id":"11","isSelectable":true,"name":"styles.css"}],"id":"2","isSelectable":true,"name":"frontend"},{"children":[{"id":"6","isSelectable":true,"name":"Header.tsx"},{"id":"7","isSelectable":true,"name":"Footer.tsx"}],"id":"5","isSelectable":true,"name":"components"},{"children":[{"id":"9","isSelectable":true,"name":"apiRoutes.js"},{"id":"10","isSelectable":true,"name":"dbConfig.js"}],"id":"8","isSelectable":true,"name":"backend"}]'
   // );
 
-  const renderTreeItems = (items) => {
+  const renderTreeItems = (items: FileStructureItem[]) => {
     return items.map((item) => {
       if (item.children) {
         return (
