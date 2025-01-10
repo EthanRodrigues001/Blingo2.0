@@ -48,7 +48,7 @@ export default function Section5() {
       }
     } catch (error) {
       console.error("Error sending feedback:", error);
-      toast.error("Error sending feedback: " + error.message);
+      toast.error("Error sending feedback");
     }
   };
 
