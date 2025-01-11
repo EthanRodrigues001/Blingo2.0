@@ -1,5 +1,7 @@
-import { Client, Account, OAuthProvider } from "appwrite";
+"use server";
 
+import { Client, Account, OAuthProvider } from "appwrite";
+import { headers } from "next/headers";
 export const client = new Client();
 
 client
@@ -8,12 +10,20 @@ client
 // .set(process.env.NEXT_PUBLIC_API_KEY);
 console.log(client);
 export const account = new Account(client);
+
+async function getOrigin() {
+  const headersList = await headers();
+  return headersList.get("origin");
+}
+
+const origin = await getOrigin();
+
 export { ID } from "appwrite";
 
 // Go to OAuth provider login page
 account.createOAuth2Session(
   OAuthProvider.Github, // provider
-  `${process.env.NEXT_PUBLIC_PAGE_URL}/`, // redirect here on success
-  `${process.env.NEXT_PUBLIC_PAGE_URL}/`, // redirect here on failure
+  `${origin}/`, // redirect here on success
+  `${origin}/login`, // redirect here on failure
   ["repo", "user"] // scopes (optional)
 );
