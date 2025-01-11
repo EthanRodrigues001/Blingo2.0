@@ -1,9 +1,7 @@
 import { LucideProps } from "lucide-react";
 
 type IconType = {
-  [key: string]: (
-    props: LucideProps
-  ) => TypedReactElement<any, string | JSXElementConstructor<any>>;
+  [key: string]: (props: LucideProps) => TSX.Element;
 };
 
 const Icons: IconType = {
