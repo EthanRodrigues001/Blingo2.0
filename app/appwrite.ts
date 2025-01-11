@@ -13,7 +13,7 @@ export { ID } from "appwrite";
 // Go to OAuth provider login page
 account.createOAuth2Session(
   OAuthProvider.Github, // provider
-  " http://localhost:3000/success", // redirect here on success
-  " http://localhost:3000/failed", // redirect here on failure
+  `${process.env.NEXT_PUBLIC_PAGE_URL}/`, // redirect here on success
+  `${process.env.NEXT_PUBLIC_PAGE_URL}/`, // redirect here on failure
   ["repo", "user"] // scopes (optional)
 );

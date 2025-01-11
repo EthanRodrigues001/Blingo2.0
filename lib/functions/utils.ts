@@ -80,7 +80,10 @@ export async function fetchProjects(
     projectName,
   } = params;
 
-  const url = new URL("/api/v1/ai/projects", "http://localhost:3000");
+  const url = new URL(
+    "/api/v1/ai/projects",
+    `${process.env.NEXT_PUBLIC_PAGE_URL}`
+  );
   url.searchParams.append("fieldOfInterest", fieldOfInterest);
   url.searchParams.append("stack", stack.join(","));
   url.searchParams.append("targetSector", targetSector);

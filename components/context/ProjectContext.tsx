@@ -80,7 +80,7 @@ export const ProjectsProvider: React.FC<ProjectsProviderProps> = ({
     setLoading(true);
     try {
       const response = await fetch(
-        `http://localhost:3000/api/v1/projects?userId=${user.$id}`
+        `${process.env.NEXT_PUBLIC_PAGE_URL}/api/v1/projects?userId=${user.$id}`
       );
       if (!response.ok) throw new Error(`HTTP error: ${response.status}`);
       const data = await response.json();
