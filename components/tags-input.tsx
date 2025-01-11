@@ -177,7 +177,7 @@ export default function TagsInput({
   const [isOpen, setIsOpen] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
-  const containerRef = useRef<HTMLElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const filteredSuggestions = suggestions
     .filter(
@@ -227,7 +227,10 @@ export default function TagsInput({
   useClickOutside(containerRef, () => setIsOpen(false));
 
   return (
-    <div className="w-full space-y-2" ref={containerRef as React.RefObject<HTMLDivElement>}>
+    <div
+      className="w-full space-y-2"
+      ref={containerRef as React.RefObject<HTMLDivElement>}
+    >
       {label && (
         <label
           htmlFor="tags-input"
