@@ -13,7 +13,7 @@ export { ID } from "appwrite";
 // Go to OAuth provider login page
 account.createOAuth2Session(
   OAuthProvider.Github, // provider
-  "https://www.blingo.tech/", // redirect here on success
-  "https://www.blingo.tech/login/", // redirect here on failure
+  "http://www.blingo.tech/", // redirect here on success
+  "http://www.blingo.tech/login/", // redirect here on failure
   ["repo", "user"] // scopes (optional)
 );
