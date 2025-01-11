@@ -2,7 +2,7 @@ import React from "react";
 import { LucideProps } from "lucide-react";
 
 type IconType = {
-  [key: string]: (props: LucideProps) => JSX.Element;
+  [key: string]: (props: LucideProps) => React.ReactElement;
 };
 const Icons: IconType = {
   icon: (props: LucideProps) => (
