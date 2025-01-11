@@ -1,9 +1,9 @@
-import { LucideProps } from "lucide-react";
+import React from "react";
+import { LightbulbIcon as LucideProps } from "lucide-react";
 
 type IconType = {
-  [key: string]: (props: LucideProps) => TSX.Element;
+  [key: string]: (props: LucideProps) => JSX.Element;
 };
-
 const Icons: IconType = {
   icon: (props: LucideProps) => (
     <svg
