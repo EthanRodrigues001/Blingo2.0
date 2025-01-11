@@ -88,7 +88,7 @@ export default function Section5() {
                 How much did you like the UI? (0-8)
               </label>
               <RadioGroup
-                value={rating}
+                value={rating.toString()}
                 onValueChange={(value) => setRating(Number(value))}
                 className="flex gap-0 -space-x-px rounded-lg shadow-sm shadow-black/5"
               >
