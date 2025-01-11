@@ -2,7 +2,7 @@ import React from "react";
 import { LightbulbIcon as LucideProps } from "lucide-react";
 
 type IconType = {
-  [key: string]: (props: LucideProps) => JSX.Element;
+  [key: string]: (props: React.ComponentProps<LucideProps>) => JSX.Element;
 };
 const Icons: IconType = {
   icon: (props: LucideProps) => (
