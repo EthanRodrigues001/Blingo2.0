@@ -11,12 +11,11 @@ client
 console.log(client);
 export const account = new Account(client);
 
-async function getOrigin() {
-  const headersList = await headers();
-  return headersList.get("origin");
+const headersData = await headers();
+const origin = headersData.get("origin");
+if (!origin) {
+  throw new Error("Origin header is missing");
 }
-
-const origin = await getOrigin();
 
 export { ID } from "appwrite";
 
