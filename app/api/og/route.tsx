@@ -54,8 +54,12 @@ export async function GET(request: NextRequest) {
         height: 630,
       }
     );
-  } catch (e: any) {
-    console.log(`${e.message}`);
+  } catch (e: unknown) {
+    if (e instanceof Error) {
+      console.log(`${e.message}`);
+    } else {
+      console.log(`Unexpected error: ${e}`);
+    }
     return new Response(`Failed to generate the image`, {
       status: 500,
     });
