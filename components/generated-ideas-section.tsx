@@ -3,23 +3,26 @@ import { useState } from "react";
 import { Switch } from "./ui/switch";
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
+import { Loader2 } from "lucide-react";
 
 interface GeneratedIdeasSectionProps {
   ideas: string[];
   onSelectIdea: (idea: string) => void;
   setDisableButton: React.Dispatch<React.SetStateAction<boolean>>;
+  isSubmitting: boolean;
 }
 
 export default function GeneratedIdeasSection({
   ideas,
   onSelectIdea,
   setDisableButton,
+  isSubmitting,
 }: GeneratedIdeasSectionProps) {
   const [customIdea, setCustomIdea] = useState("");
   const [disableGenerated, setDisableGenerated] = useState(false);
 
   const handleCustomIdeaSubmit = () => {
-    if (customIdea.trim()) {
+    if (customIdea.trim() && !isSubmitting) {
       onSelectIdea(customIdea);
       setCustomIdea("");
     }
@@ -44,8 +47,16 @@ export default function GeneratedIdeasSection({
                   onClick={() => onSelectIdea(idea)}
                   size="sm"
                   className="self-start sm:self-center whitespace-nowrap"
+                  disabled={isSubmitting}
                 >
-                  Select Idea
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Submitting...
+                    </>
+                  ) : (
+                    "Select Idea"
+                  )}
                 </Button>
               </div>
             ))}

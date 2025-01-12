@@ -47,6 +47,7 @@ export default function ProjectIdeaGenerator() {
   const [pageLoading, setpageLoading] = useState(false);
   const [ideasGenerated, setIdeasGenerated] = useState(false);
   const [disableButton, setDisableButton] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const generateIdeas = async () => {
     if (
@@ -111,6 +112,9 @@ export default function ProjectIdeaGenerator() {
   };
 
   const handleIdeaSubmit = async (selectedIdea: string) => {
+    if (isSubmitting) return; // Prevent multiple submissions
+    setIsSubmitting(true);
+    toggleLoading(true);
     if (isPlanLimitFull === true) {
       toast("Action Required", {
         description:
@@ -120,12 +124,13 @@ export default function ProjectIdeaGenerator() {
           onClick: () => router.push("/pricing"),
         },
       });
+      setIsSubmitting(false);
+      toggleLoading(false);
       return;
     }
     toast("Idea Selected", {
       description: "You've chosen: " + selectedIdea,
     });
-    toggleLoading(true);
     try {
       console.log(
         fieldOfInterest,
@@ -172,11 +177,15 @@ export default function ProjectIdeaGenerator() {
       }
 
       refreshProjects();
-
+      toast.success("Project created successfully!");
       router.push("/dashboard");
     } catch (error) {
-      console.error("Failed to fetch and store project:", error);
+      console.error(
+        "Please try again. Failed to fetch and store project:",
+        error
+      );
     } finally {
+      setIsSubmitting(false);
       toggleLoading(false);
     }
   };
@@ -368,6 +377,7 @@ export default function ProjectIdeaGenerator() {
           ideas={ideas}
           onSelectIdea={handleIdeaSubmit}
           setDisableButton={setDisableButton}
+          isSubmitting={isSubmitting}
         />
       </div>
     </Card>

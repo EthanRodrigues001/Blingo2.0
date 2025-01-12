@@ -26,7 +26,7 @@ export default function GettingStartedPage() {
       <Button
         variant="ghost"
         className="absolute top-4 left-4 text-white"
-        onClick={() => router.back()}
+        onClick={() => router.push("/")}
       >
         <ArrowLeft className="mr-2 h-4 w-4" />
         Back
