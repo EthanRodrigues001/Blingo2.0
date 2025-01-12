@@ -78,7 +78,7 @@ export default function Section1() {
                   className="hidden dark:block rounded-lg lg:rounded-[20px] w-full h-auto"
                   animationStyle="from-center"
                   videoSrc="https://www.youtube.com/embed/dQw4w9WgXcQ?si=y_G-0FWV5qMIpZbC"
-                  thumbnailSrc="cover.png"
+                  thumbnailSrc="/cover.PNG"
                   thumbnailAlt="Hero Video"
                 />
               </div>
