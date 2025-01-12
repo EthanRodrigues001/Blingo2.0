@@ -41,12 +41,31 @@ export async function GET(request: NextRequest) {
           >
             {title}
           </div>
-          <img
-            width="203"
-            height="44"
-            src="https://www.blingo.tech/pfp.png"
-            alt="Logo"
-          />
+          <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+            <img
+              width="48"
+              height="48"
+              src="https://www.blingo.tech/pfp.png"
+              alt="Profile"
+              style={{
+                borderRadius: "50%",
+              }}
+            />
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                color: "white",
+              }}
+            >
+              <span style={{ fontSize: "20px", fontWeight: 500 }}>
+                Pasquale Vitiello
+              </span>
+              <span style={{ fontSize: "16px", opacity: 0.8 }}>
+                Co-Founder Cruip
+              </span>
+            </div>
+          </div>
         </div>
       ),
       {
