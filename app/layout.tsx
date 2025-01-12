@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     url: "https://www.blingo.tech/",
     images: [
       {
-        url: "https://www.blingo.tech/api/meta/og",
+        url: "https://www.blingo.tech/api/og",
       },
     ],
   },
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     title: "Blingo: AI-Powered Project Roadmaps",
     description:
       "Discover how Blingo's AI-driven platform can help you generate and customize project roadmaps tailored to your unique needs. Simplify your workflow and achieve your goals with ease.",
-    images: ["https://www.blingo.tech/api/meta/og"],
+    images: ["https://www.blingo.tech/api/og"],
   },
 };
 

@@ -1,12 +1,9 @@
 import { ImageResponse } from "next/og";
+import { NextRequest } from "next/server";
 
 export const runtime = "edge";
 
-export async function GET(request: Request) {
-  const interExtrabold = fetch(
-    new URL("../../../public/Inter-ExtraBold.ttf", import.meta.url)
-  ).then((res) => res.arrayBuffer());
-
+export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
 
@@ -47,21 +44,14 @@ export async function GET(request: Request) {
           <img
             width="203"
             height="44"
-            src={`https://www.blingo.tech/pfp.png`}
+            src="https://www.blingo.tech/pfp.png"
+            alt="Logo"
           />
         </div>
       ),
       {
         width: 1200,
         height: 630,
-        fonts: [
-          {
-            name: "Inter",
-            data: await interExtrabold,
-            style: "normal",
-            weight: 800,
-          },
-        ],
       }
     );
   } catch (e: any) {
