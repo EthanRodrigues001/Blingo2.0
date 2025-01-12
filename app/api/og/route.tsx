@@ -59,10 +59,10 @@ export async function GET(request: NextRequest) {
               }}
             >
               <span style={{ fontSize: "20px", fontWeight: 500 }}>
-                Pasquale Vitiello
+                Ethan Rodrigues
               </span>
               <span style={{ fontSize: "16px", opacity: 0.8 }}>
-                Co-Founder Cruip
+                Founder Blingo
               </span>
             </div>
           </div>
