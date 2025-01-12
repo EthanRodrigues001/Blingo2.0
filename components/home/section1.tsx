@@ -31,15 +31,14 @@ export default function Section1() {
             </span>
           </div>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl bg-gradient-to-br from-foreground to-foreground/60 bg-clip-text text-transparent py-2 md:py-4 lg:!leading-tight font-medium tracking-[-0.0125em] mt-6 font-heading">
-            Turn Your Vision into Reality
-            <br /> with AI-Driven Project Roadmaps
+            Kickstart Your Project Journey
           </h1>
           <p className="text-sm sm:text-base lg:text-lg mt-4 text-accent-foreground/60 max-w-2xl mx-auto">
-            Fuel your hackathon journey with instant project ideas tailored to
-            your team, tech stack, and timeline.{" "}
+            Unlock your potential with our intuitive platform! Effortlessly
+            generate, customize, and execute projects tailored to your needs.{" "}
             <span className="hidden sm:inline">
-              From innovative concepts to complete roadmaps, our AI gets you
-              competition-ready in no time.
+              Transform your ideas into reality and make your project journey
+              seamless and enjoyable.
             </span>
           </p>
           <div className="flex items-center justify-center md:gap-x-6 mt-8">
