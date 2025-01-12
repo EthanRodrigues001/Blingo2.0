@@ -1,6 +1,6 @@
 // src/app/oauth/route.js
 
-import { getUserData } from "@/actions/auth";
+// import { getUserData } from "@/actions/auth";
 import { createAdminClient } from "@/lib/server/appwrite";
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
@@ -19,12 +19,12 @@ export async function GET(request: NextRequest) {
     secure: true,
   });
 
-  const user = await getUserData(userId!);
+  // const user = await getUserData(userId!);
 
-  if (user && !user.hasCompletedOnboarding) {
-    // Redirect to the "Getting Started" page if the user hasn't seen it
-    return NextResponse.redirect(`${request.nextUrl.origin}/getting-started`);
-  }
+  // if (user && !user.hasCompletedOnboarding) {
+  //   // Redirect to the "Getting Started" page if the user hasn't seen it
+  //   return NextResponse.redirect(`${request.nextUrl.origin}/getting-started`);
+  // }
 
   return NextResponse.redirect(`${request.nextUrl.origin}/`);
 }
