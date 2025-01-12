@@ -35,7 +35,7 @@ export default function Section1() {
           </h1>
           <p className="text-sm sm:text-base lg:text-lg mt-4 text-accent-foreground/60 max-w-2xl mx-auto">
             Unlock your potential with our intuitive platform. Effortlessly
-            generate and customize project roadmaps tailored to your needs.{" "}
+            generate project roadmaps tailored to your needs.{" "}
             <span className="hidden sm:inline">
               Transform your ideas into reality and make your project journey
               seamless and enjoyable.
