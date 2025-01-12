@@ -1,7 +1,9 @@
 "use client";
 
+import { useProjects } from "@/components/context/ProjectContext";
 // import { useUser } from "@/components/context/UserContext";
 import { AppSidebar } from "@/components/main/app-sidebar";
+import Loading from "@/components/main/Loading";
 import { UserProfileDrawer } from "@/components/main/sidebar/UserProfileDrawer";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -11,6 +13,7 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { UserRoundPen } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function WithNavbarLayout({
@@ -18,10 +21,14 @@ export default function WithNavbarLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const router = useRouter();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  // const { user, loading } = useUser();
+  const { projects, loading } = useProjects();
 
-  // if (loading || !user) return <div>Loading user data...</div>;
+  if (loading) return <Loading />;
+  if (projects.length === 0) {
+    router.push("/getting-started");
+  }
 
   return (
     <>
