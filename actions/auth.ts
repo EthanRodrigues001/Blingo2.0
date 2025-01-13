@@ -25,7 +25,8 @@ export async function getLoggedInUser() {
     if (result) {
       user = await getUserData(result.$id);
       if (!user) {
-        createNewUser(result.name, result.email, result.$id);
+        await createNewUser(result.name, result.email, result.$id);
+        user = await getUserData(result.$id);
       }
     }
 
@@ -52,7 +53,7 @@ export const getUserData = async (userId: string) => {
       process.env.NEXT_PUBLIC_COLLECTION_ORDERS!,
       [Query.equal("id", userId)]
     );
-    return user.documents[0];
+    return user.documents[0] || null;
   } catch (error) {
     console.log(error);
     return null;

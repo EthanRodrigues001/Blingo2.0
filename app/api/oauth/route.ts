@@ -9,22 +9,24 @@ export async function GET(request: NextRequest) {
   const userId = request.nextUrl.searchParams.get("userId");
   const secret = request.nextUrl.searchParams.get("secret");
 
-  const { account } = await createAdminClient();
-  const session = await account.createSession(userId!, secret!);
+  if (!userId || !secret) {
+    return NextResponse.redirect(`${request.nextUrl.origin}/login`);
+  }
 
-  (await cookies()).set("blingo-session", session.secret, {
-    path: "/",
-    httpOnly: true,
-    sameSite: "strict",
-    secure: true,
-  });
+  try {
+    const { account } = await createAdminClient();
+    const session = await account.createSession(userId, secret);
 
-  // const user = await getUserData(userId!);
+    (await cookies()).set("blingo-session", session.secret, {
+      path: "/",
+      httpOnly: true,
+      sameSite: "strict",
+      secure: true,
+    });
 
-  // if (user && !user.hasCompletedOnboarding) {
-  //   // Redirect to the "Getting Started" page if the user hasn't seen it
-  //   return NextResponse.redirect(`${request.nextUrl.origin}/getting-started`);
-  // }
-
-  return NextResponse.redirect(`${request.nextUrl.origin}/`);
+    return NextResponse.redirect(`${request.nextUrl.origin}/`);
+  } catch (error) {
+    console.error("Failed to create session:", error);
+    return NextResponse.redirect(`${request.nextUrl.origin}/login`);
+  }
 }
